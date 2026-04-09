@@ -1,0 +1,23 @@
+If you wish to use this corpus please cite:
+
+Meertens, M.J. (2026). KCD1 and KCD2 Steam review corpus (version 1.0) [Data set]. GitHub.
+
+If you wish to use/copy/change the code please use:
+
+Meertens, M. J. (2026). Steam review tokenization and analysis pipeline (version 1.0) [Software]. GitHub.
+
+However, I have used other peoples work too so make sure to cite that! Software and tools I have used:
+
+Baccianella, S., Esuli, A., & Sebastiani, F. (2010). SentiWordNet 3.0: An enhanced lexical resource for sentiment analysis and opinion mining. In N. Calzolari et al. (Eds.), Proceedings of the Seventh International Conference on Language Resources and Evaluation (LREC’10). European Language Resources Association. https://aclanthology.org/L10-1531/
+
+Bird, S., Klein, E., & Loper, E. (2009). Natural language processing with Python: Analyzing text with the natural language toolkit. O’Reilly Media. https://www.nltk.org/book/
+
+Honnibal, M., Montani, I., Van Landeghem, S., & Boyd, A. (2020). spaCy: Industrial-strength natural language processing in Python. https://doi.org/10.5281/zenodo.1212303
+
+Hutto, C., & Gilbert, E. (2014). VADER: A parsimonious rule-based model for sentiment analysis of social media text. Proceedings of the International AAAI Conference on Web and Social Media, 8(1), 216–225. https://doi.org/10.1609/icwsm.v8i1.14550
+
+McKinney, W. (2010). Data structures for statistical computing in Python. In S. van der Walt & J. Millman (Eds.), Proceedings of the 9th Python in Science Conference (pp. 56–61). https://doi.org/10.25080/Majora-92bf1922-00a
+
+Wok. (2018). download-steam-reviews [Python software]. GitHub. https://github.com/woctezuma/download-steam-reviews
+
+Also see other literature at the end of the report.  
