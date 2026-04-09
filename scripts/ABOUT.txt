@@ -1,0 +1,46 @@
+SETUP:
+
+1. Install dependencies:
+   pip install pandas spacy nltk tqdm numpy openpyxl steamreviews
+
+
+Why did I make 3 scripts instead of 1: Could have done it in one, but I'm working with very large corpora and the first 2 take a very long time to run. The first 2 are just making the corpora (these take the longest to run), the third  one is the analysis itself, which is probably the only one that will be graded and may be the only relevant script to run to check if it works. It was a conscious decision to make 3. Running everything takes a while because of the giant data set, but I have made this in such a way that you will not have to do so by including all that is needed in this ZIP. It is written in such a way that it will only run the heavy parts if the needed files do not exist in your current working directory (which should not be the case because you have downloaded this folder).That is to say; worry not, all is pickled. If you run all the scripts on a different/more recently scraped .json, make sure you adapt the code so it does not make the analysis based on the pickled files. 
+
+What do these scripts do?
+
+scrape.py
+Uses the steamreviews module (https://github.com/woctezuma/download-steam-reviews) to extract a very large .json file of all the reviews written in English and their metadata. I know it's probably more efficient to have used a loop, but there's only 2 app_id's and they are BIG. Took me 30 minutes each, around 80.000 reviews each. I would NOT recommend you run this. It is just to show how I extracted the data. It saves a .json file to the 'data' folder of the parent folder. Run once for every game. 
+
+preprocess.py
+The first function, clean_reviews(df), only takes the review itself from the given dataframe, other columns (author, hardware of player etc) are not read. This significantly shrinks each corpus and makes it easier to work with. It then removes empty reviews and reviews with only whitespaces. I will run the sentiment analysis on this one. 
+
+The second function, preprocess(text), tokenizes the words and puts them into lowercase, removes URLs, and non-alphabetic characters, and adds these tokens as a new column to our dataframe, which will be used for POS-tagging (all words are needed for somewhat trustworthy POS-tagging). The tokens are lemmatized (e.g. 'dancing', 'dances' -> 'dance').
+
+It then makes another column, which is the same as the second, but also removes stopwords. It makes sure to remove all the stopwords, no matter the casing: 'I' is in the list of stopwords, but 'i' is in my corpus. I have removed 'not' from the list of stopwords, to make sure my corpus includes negations, because I will perform an analysis on evaluative language. It will also be used for keyword and frequency analysis.
+
+The last column it makes is the review split into sentences, because  different aspects of the game may be expressed in separate sentences, and this may be useful for sentiment analysis. 
+
+It saves it to a .csv in the data file, neatly pipelined into a loop. I would also suggest you do not run this because it takes long because it iterates over all the words with spacy. Just to be sure you're not stuck, it includes a progress bar. It results in:
+kcd1_reviews.csv
+kcd2_reviews.csv
+
+analysis.py
+The actual analysis part. 
+
+It starts with importing some modules and reading some files and setting path.
+
+It starts with POS tagging. If you have downloaded all the pickled files, it will read the already-POS tagged files for further analysis. If not, it will do so, and save it as a pickle, so you won't have to run this over and over again. This pickling method is used all over the script.
+
+In the next bit, we're reading the tokens and we pickle them again, if not already done.
+It puts all tokens in a list to count them. It calculates the relative frequency of each word (per 1000 words). It also prints the top 20 in a nice format. The relative frequencies are pickled, if not already done. 
+
+It then counts the most frequent adjectives, adverb and verb for each corpus, relatively. It prints the top 20. I used SentiWordNet to make a evaluative-language-identifier. (I spent a lot of time on this)
+To analyse evaluative language a bit further, it finds the most frequent collocates. 
+Panagiotopoulos et al. (2019) created a table of 5 game review aspects: graphics, gameplay, audio, community and performance. They included some words per aspect. I have also added some myself. I use this list for the collocates. This collocate searching also uses the pickling method.
+It creates an excel sheet in the output folder with the top 5 collocates within the same POS (noun, verb, adverb or adjective) per word (so there's a top 5 collocate adjectives for 'audio', a top 5 collocate adverb for 'audio', etc). 
+
+It then does a sentiment analysis on all the collocates of the given words and calculates a sentiment score for each aspect. It saves as a table in the output folder. It has the mean and standard deviations and the difference in mean between both corpora. 
+
+It then does a sentiment analysis on the full review, again, pickled. It saves as a table in the output folder. It has mean, standard deviation and the relative amount of each sentiment (so for example, 78% of KCD1 reviews are positive, 86% of KCD2 reviews are positive. Some will be exactly between positive and negative (0), so I made a neutral category. This will not be used for the percentages, it's just so the loop works. 
+It repeats this process for the sentences. 
+
