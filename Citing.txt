@@ -1,10 +1,10 @@
 If you wish to use this corpus please cite:
 
-Meertens, M.J. (2026). KCD1 and KCD2 Steam review corpus (version 1.0) [Data set]. GitHub.
+Meertens, M.J. (2026). KCD1 and KCD2 Steam review corpus (version 1.0) [Data set]. GitHub. https://github.com/mjmeertens/KCD-review-corpus-builder.git
 
 If you wish to use/copy/change the code please use:
 
-Meertens, M. J. (2026). Steam review tokenization and analysis pipeline (version 1.0) [Software]. GitHub.
+Meertens, M. J. (2026). Steam review tokenization and analysis pipeline (version 1.0) [Software]. GitHub. https://github.com/mjmeertens/KCD-review-corpus-builder.git
 
 However, I have used other peoples work too so make sure to cite that! Software and tools I have used:
 
