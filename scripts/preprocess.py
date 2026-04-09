@@ -1,3 +1,4 @@
+#By M.J. Meertens 2026
 # Import stuff
 import json
 import pandas as pd
