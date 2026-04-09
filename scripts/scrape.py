@@ -1,4 +1,4 @@
-
+# Huge credit to woctezuma on GitHub for the steamreviews code, it works flawlessly: https://github.com/woctezuma/download-steam-reviews.
 import os
 import steamreviews
 
